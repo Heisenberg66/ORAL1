@@ -1,0 +1,62 @@
+\begin{small}
+\begin{cursive}
+  \begin{center}
+    \textbf{\underline{Organisation et utilisation des fichiers, exemples d'algorithme de gestion.}}
+  \end{center}
+  \begin{enumerate}[1)]
+    \item \underline{Les fichiers et leur contenu}
+      \begin{enumerate}[a)]
+        \item La sauvegarde pérenne
+          \begin{itemize}
+            \item Mémoire vive et mémoire morte
+            \item Nécessité de sauvegarde entre exécutions de programmes
+          \end{itemize}
+        
+        \item Fichiers texte et binaires
+          \begin{itemize}
+            \item Exemples fichiers texte, lignes et chaînes (lecture humaine)
+            \item Exemples fichiers binaires (exploitation par programmes)
+          \end{itemize}
+          
+        \item Structuration des fichiers textes
+          \begin{itemize}
+            \item Fichiers texte brut (texte au kilomètre)
+            \item Fichiers organisés par lignes structurés (csv) 
+          \end{itemize}
+      \end{enumerate}
+
+    \item \underline{Exploiter les fichiers}
+      \begin{enumerate}[a)]
+        \item Adapter la structuration à l'usage
+          \begin{itemize}
+            \item Les types d'accès (séquentiel, direct(aléatoire), indexé)
+            \item Exemples de structurations 
+          \end{itemize}
+          
+        \item Ouverture, lecture et écriture
+          \begin{itemize}
+            \item Les modes d'ouverture d'un fichier (lecture, écriture, ajout)
+            \item Les stratégies de traitement
+          \end{itemize}
+        
+      \end{enumerate}
+    
+    \item \underline{Organisation des fichiers}
+      \begin{enumerate}[a)]
+        \item L'organisation arborescente des fichiers
+          \begin{itemize}
+            \item Notion de dossier
+            \item Arbre de fichier
+            \item Recherche de fichier
+          \end{itemize}
+          
+        \item Le système et ses types de fichiers
+          \begin{itemize}
+            \item Les fichiers spéciaux (extension, placement)
+            \item Organisation des fichiers sur une machine
+          \end{itemize}
+      \end{enumerate}
+      
+  \end{enumerate}
+\end{cursive}
+\end{small}
