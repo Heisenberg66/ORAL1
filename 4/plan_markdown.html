@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h2 id="exemples-dalgorithmes-de-recherche-dans-un-tableau-ou-une-liste"><strong>Exemples d’algorithmes de recherche dans un tableau ou une liste.</strong></h2>
+
+<hr>
+
+
+
+<h1 id="le-problème-de-la-recherche">Le problème de la recherche </h1>
+
+
+
+<h2 id="collections-ordonnées-dobjets-les-tableaux-et-les-listes">Collections ordonnées d’objets : les tableaux et les listes</h2>
+
+<p>suites indexées d’éléments <br>
+Les tableaux :  <br>
+- zone mémoire contiguë,  <br>
+- accès à un élément d’indice i en temps constant,  <br>
+- utilisation en scratch et en python (type list)</p>
+
+<p>Les listes chainées :  <br>
+- mémoire non contiguë  <br>
+- maillon relié par référence, pointeur <br>
+- accès à l’élément d’indice i en temps O(i)/ proportionnel à i  <br>
+- exemple d’implémentation en python</p>
+
+
+
+<h2 id="description-du-problème">description du problème</h2>
+
+<p>Etant donnée une collection indexés d’objets L et un objet o, déterminer si o appartient à L. <br>
+Variantes :  <br>
+- la position <br>
+- nombre d’occurence <br>
+- min/max</p>
+
+<p>L est un tableau ou une liste </p>
+
+<hr>
+
+<p>comparaison de la complexité , accès aux éléments, entre tableau et liste</p>
+
+
+
+<h1 id="recherche-dans-une-structure-non-triée">Recherche dans une structure non triée</h1>
+
+<p>Éléments dans le désordre ou non comparable </p>
+
+
+
+<h2 id="1-recherche-séquentielle-lalgorithme-de-base">1- Recherche séquentielle, l’algorithme de base</h2>
+
+<pre><code>Description en pseudo-code de l'algo
+Complexité en O(len(L)) pour les listes ou les tableaux
+exemple de situation 
+implémentation (récursive ou itérative en python et/ou en scratch )
+
+autres recherches: 
+- recherche de position
+- recherche à la position
+- recherche de doublons
+- nombre d’occurrence   
+complexité dans les deux cas     
+</code></pre>
+
+
+
+<h2 id="2-recherche-séquentielle-algorithmes-particuliers">2- Recherche séquentielle : algorithmes particuliers</h2>
+
+<pre><code>recherche auto-adaptative ( application, pourquoi utiliser cet algo, plus efficace sur les listes que sur les tableaux)
+
+recherche dans un tableau multi-dimensionnelle (boucles imbriqués ) 
+</code></pre>
+
+<hr>
+
+<h1 id="recherche-dans-une-structure-triée">Recherche dans une structure triée</h1>
+
+<p>contexte : éléments comparables 2 à 2 <br>
+collection triée selon une relation d’ordre totale.</p>
+
+<h2 id="1-recherche-séquentielle">1- Recherche séquentielle</h2>
+
+<pre><code>cas d'arrêt si l'élément rechercher est plus grand que T[i]
+recherche de position : complexité moindre
+recherche à la position : même complexité
+recherche de doublon : complexité moindre
+nombre de d’occurrence : complexité moindre
+</code></pre>
+
+
+
+<h2 id="2-recherche-par-dichotomie">2- Recherche par dichotomie</h2>
+
+<pre><code>activité introductive :jeu de la devinette
+observation : si L(i)&lt;o, on peut ignorer les indices &lt;= i, et réciproquement
+principe
+implémentation sur les tableaux (itératif,récursif) 
+complexité sur les tableaux
+sur les listes : inefficaces ( pas d'accès direct aux éléments)
+</code></pre>
+
+<hr>
+
+<h1 id="ouverture-recherche-par-interpolation">Ouverture : Recherche par interpolation</h1>
+
+<pre><code>principe
+lien avec le dictionnaire (au sens littéral)
+pseudo-code 
+avantage, inconvénient
+</code></pre></div></body>
+</html>
