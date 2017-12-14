@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="14-représentation-binaire-des-nombres-formats-exemples-dapplications"><strong>14 -Représentation binaire des nombres : formats, exemples d’applications</strong></h1>
+
+<hr>
+
+<h1 id="le-problème">Le problème</h1>
+
+<pre><code>La machine fonctionne en binaire
+nécessité de se comprendre, d'avoir des règles
+</code></pre>
+
+<hr>
+
+<h1 id="i-bases-binaires-décimales-et-autres">I - Bases binaires, décimales et autres</h1>
+
+<pre><code>base 10
+base 2
+base 8,16
+bases exotiques (60, joueur avec le temps)
+nombre de symboles (chiffres) nécessaires pour écrire un nombre
+</code></pre>
+
+<hr>
+
+<h1 id="ii-formats-informatique-pour-les-nombres">II - Formats informatique pour les nombres</h1>
+
+<pre><code>Définition bit de poids fort, bit de poids faible
+nombres entiers positif (int: 32 bits)(octet et taille)
+nombres entiers relatifs(bit de signe, complément à 2)
+Comportement des entiers sous python (les polynômes)
+Les nombres flottants
+</code></pre>
+
+<hr>
+
+<h1 id="iii-conversions-entre-ces-différentes-bases">III - Conversions entre ces différentes bases</h1>
+
+<pre><code>conversions 2 &lt;--&gt; 10 : Algo ou à la main 
+conversions 2 &lt;--&gt; 16
+conversions 10 &lt;--&gt; 16 
+activité = jeu de la devinette 
+</code></pre>
+
+<hr>
+
+<h1 id="iv-opérations-arithmétiques">IV - Opérations arithmétiques </h1>
+
+<pre><code>addition
+soustraction
+mutliplication
+division
+</code></pre>
+
+<p>Questions : </p>
+
+<p>Pourquoi a-t-on choisi la base 2 pour l’informatique ?  <br>
+Contrainte matériel, signal éléctrique passe –&gt; 1 <br>
+                                signal électrique passe pas –&gt; 0</p>
+
+<p>Les nombres réels sont-ils représentable en binaire ?  <br>
+non, il peut y avoir un nombre infini de chiffre après la virgule</p>
+
+<p>Comment savoir si un nombre binaire est multiple de 4 ? <br>
+deux dernier chiffre sont 0</p>
+
+
+
+<h1 id="nombres-entiers-négatifs">nombres entiers négatifs</h1>
+
+<h2 id="1-bit-de-poids-fort">1- bit de poids fort</h2>
+
+<p>Exemple sur 8 octets: <br>
+- si le bit de poids fort vaut 0 -&gt; positif de 0 à 127 <br>
+- si le bit de poids fort vaut 1 -&gt; négatif de -127 à -0=0 <br>
+On a donc 2 représentation de 0 <br>
+Le bit de signe pose des problèmes pour des opérations arithmétiques</p>
+
+
+
+<h2 id="2-le-complément-à-2">2- Le complément à 2</h2>
+
+<p>C’est le complément a 1 + 1 <br>
+Cette méthode de concerne que les négatifs </p>
+
+<p>on inverse les bits dans un premier temps et ensuite on ajoute 1 <br>
+ex :</p>
+
+<pre><code>-4 : 4 = 0000 0001
+~4 =     1111 1110
+~4 + 1=  1111 1100
+3 :  0000 0011
+-4 : 1111 1100
+-1 : 1111 1111
+
+-1 : 0000 0001
+~1 : 1111 1110
+~1+1 : 1111 1111
+</code></pre>
+
+<p>En complément à 2, 0 n’a qu’une seule écriture <br>
+On sait que c’est un chiffre négatif si le bit de poids fort est 1, en effet les nombres de 0 à 127 sont compris entre 0000 0000 et 0111 1111 donc les nombres négatifs de -128 à -1 sont compris entre 1000 0000 et 1111 1111 </p>
+
+<p>Problème sur les nombres flottants : (a+b)+c =/= a+(b+c)</p>
+
+<p>Comment trouver pi avec un représentation informatique ?  <br>
+on cherche un fraction d’entier très long qui approche pi </p>
+
+<p>Quelles nombres peut-on représenter en machine ?  <br>
+les entiers, les fractions, </p>
+
+<p>Comment python représente les très grands nombre ? <br>
+32 bits -&gt; int <br>
+64 bits -&gt; long int <br>
+les nombres très grands sont représenté par des polynômes</p></div></body>
+</html>
