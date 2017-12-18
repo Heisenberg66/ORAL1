@@ -5,8 +5,15 @@ import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import random as rd
 
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+#génère une image avec des pixels de couleur aléatoire
 
 def rand_img(l,c):
+    print("rand_img : En cours")
+    
     b = 1 * np.ones((l, l, 4), dtype=np.uint16)
     
     for i in range(l):
@@ -17,14 +24,19 @@ def rand_img(l,c):
                 
                 r = rd.randint(0,255)
                 b[i,j,k]=r
+ 
+    plt.figure(2)
+    plt.imshow(b)
+    plt.axis('off')
     
     return b
     
-    
-    
+#-------------------------------------------------------------------------------
 
+# renvoie le négatif de l'image 
 
 def inverser(img):
+    print("inverser : En cours")
     
     b=img.copy()
     
@@ -34,16 +46,26 @@ def inverser(img):
 
             pixel = b[i,j] # récupération du pixel
 
-            # on calcule le complement à MAX pour chaque composante - effet négatif
+            # on calcule le complement à 1 pour chaque composante - effet négatif
             p = (1 - pixel[0], 1 - pixel[1], 1 - pixel[2],1)
-
-            # composition de la nouvelle image
             
             b[i,j]=p
     return b
+    
+    plt.figure(3)
+    plt.imshow(b)
+    plt.axis('off')
         
 
+#-------------------------------------------------------------------------------
+
+
+# symétrie par l'axe vertical central
+
 def retourne (matrice):
+    
+    print("retourne : En cours")
+    
     b = matrice.copy()
     l = len(b)
    
@@ -51,19 +73,56 @@ def retourne (matrice):
     while i<l//2:
         b[i],b[l-1-i] = b[l-1-i].copy(),b[i].copy()
         i+=1
-    return b
+    
+    
+    plt.figure(4)
+    plt.imshow(b)
+    plt.axis('off')
+   
+#-------------------------------------------------------------------------------
+   
+# symétrie par l'axe horizontal
     
 def retourne2 (matrice):
+    
+    print("Retourne2 : En cours")
+    
     b = matrice.copy()
    
     i=0
     while i<b.shape[1]//2:
         b[:,i],b[:,b.shape[1]-1-i] = b[:,b.shape[1]-1-i].copy(),b[:,i].copy()
         i+=1
-    return b           
+    plt.figure(5)
+    plt.imshow(b)
+    plt.axis('off')           
 
+#-------------------------------------------------------------------------------
+
+#symétrie par rapport à l'axe diagonale
+
+def symetrie_centrale(matrice):
+    
+    print("symetrie_centrale : En cours")
+    
+    b = matrice.copy()
+    l = len(matrice)
+   
+    i=0
+    while i<len(b)//2:
+        b[i],b[l-1-i] = b[l-1-i].copy()[::-1],b[i].copy()[::-1]
+        i+=1
+    plt.figure(6)
+    plt.imshow(b)
+    plt.axis('off')
+    
+#-------------------------------------------------------------------------------
+
+# fusionne deux images
 
 def fusionne(img01,img02):
+    
+    print("fusionne : En cours")
     
     b=img01.copy()
     
@@ -78,9 +137,18 @@ def fusionne(img01,img02):
             # composition de la nouvelle image
             
             b[i,j]=p
-    return b
+    plt.figure(7)
+    plt.imshow(b)
+    plt.axis('off')
+
+#-------------------------------------------------------------------------------
+
+# transformation RBG en niveau de gris
 
 def niveau_de_gris(img):
+    
+    print("niveau_de_gris : En cours")
+    
     b=img.copy()
     
     for i in range(b.shape[0]):
@@ -95,10 +163,18 @@ def niveau_de_gris(img):
             b[i,j]=p
             
    
-    return b
-    
+    plt.figure(8)
+    plt.imshow(b)
+    plt.axis('off')
+
+#-------------------------------------------------------------------------------
+
+# autre formule du niveau de gris
     
 def niveau_de_gris2(img):
+    
+    print("niveau_de_gris2 : En cours")
+    
     b=img.copy()
     
     for i in range(b.shape[0]):
@@ -113,10 +189,18 @@ def niveau_de_gris2(img):
             b[i,j]=p
             
    
-    return b
-    
+    plt.figure(9)
+    plt.imshow(b)
+    plt.axis('off')
+ 
+#-------------------------------------------------------------------------------
+   
+# selectionne le canal en argument (R,V ou B)
     
 def filtrage(img,mode):
+    
+    print("filtrage : En cours")
+
     b=img.copy()
     
     for i in range(b.shape[0]):
@@ -137,10 +221,19 @@ def filtrage(img,mode):
             b[i,j]=p
             
    
-    return b
+    plt.figure(10)
+    plt.imshow(b)
+    plt.axis('off')
 
+#-------------------------------------------------------------------------------
+
+# conversion en niveau de gris puis en noir et blanc
 
 def noir_et_blanc(img):
+    
+    print("noir_et_blanc : En cours")
+
+    
     b=img.copy()
     
     for i in range(b.shape[0]):
@@ -162,9 +255,19 @@ def noir_et_blanc(img):
             b[i,j]=(p,p,p,1)
             
    
-    return b
+    plt.figure(11)
+    plt.imshow(b)
+    plt.axis('off')
+
+#-------------------------------------------------------------------------------
+
+# histogramme R V B
 
 def histogrammes (img):
+    
+    print("histogrammes : En cours")
+
+    
     r = [0]*256
     v = [0]*256
     b = [0]*256
@@ -173,73 +276,128 @@ def histogrammes (img):
 
         for j in range(img.shape[1]):
             
-            r[int(255 * (1-img[i,j,0]))]+=1
-            v[int(255 * (1-img[i,j,1]))]+=1
-            b[int(255 * (1-img[i,j,2]))]+=1
+            # r[int(255 * (1-img[i,j,0]))]+=1
+            # v[int(255 * (1-img[i,j,1]))]+=1
+            # b[int(255 * (1-img[i,j,2]))]+=1
+            # 
+            r[img[i,j,0]]+=1
+            v[img[i,j,1]]+=1
+            b[img[i,j,2]]+=1
+        
     
-    return r,v,b
+    plt.figure(1)
+    plt.subplot(311)
+    plt.plot(range(256),r,'r-')
+
+    plt.subplot(312)
+    plt.plot(range(256),v,'g-')
+
+    plt.subplot(313)
+    plt.plot(range(256),b,'b-')
+
+#-------------------------------------------------------------------------------
     
+# extrait une image rectangle venant de l'original 
+# (x1,y1) -> top left corner
+# (x2,y2) -> bottom right corner
+    
+def extraction (img,x1,y1,x2,y2):
+    
+    print("extraction : En cours")
+
+    
+    if x1<img.shape[0] and x2<img.shape[0] and y1<img.shape[1] and y2<img.shape[1] and x1<x2 and y1<y2:
+        
+        plt.figure(12)
+        plt.imshow(img[x1:x2,y1:y2,:])
+        plt.axis('off')
+        
+    
+
+#-------------------------------------------------------------------------------
+    
+# renforce les couleurs  
+# argument : liste [a,b,g] avec a,b,g flottant entre [0,1]  
+    
+def renforcement_couleur(img,liste):
+    
+    print("renforcement_couleur : En cours")
+
+    
+    b=img.copy()
+    
+    for i in range(b.shape[0]):
+
+        for j in range(b.shape[1]):
+            
+            if b[i,j,0]+liste[0]<=1:
+                b[i,j,0]+=liste[0]
+            else:
+                b[i,j,0]=1
+            if b[i,j,1]+liste[1]<=1:
+                b[i,j,1]+=liste[1]
+            else:
+                b[i,j,1]=1
+            if b[i,j,2]+liste[2]<=1:
+                b[i,j,2]+=liste[2]
+            else:
+                b[i,j,2]=1
+    
+    plt.figure(13)
+    plt.imshow(b)
+    plt.axis('off')
+            
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+    
+    
+    
+ImageFileTWD = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/tiger.png"
+ImageFileGOT = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/got.png"
+ImageFileCS = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/chapelle_sixtine.png"
 
 
 # ouverture du fichier image
-
-ImageFileTWD = "/Users/Boulanger/Documents/COURS/M1/Oral 1/18/tiger.png"
-ImageFileGOT = "/Users/Boulanger/Documents/COURS/M1/Oral 1/18/got.png"
-ImageFileCS = "/Users/Boulanger/Documents/COURS/M1/Oral 1/18/chapelle_sixtine.png"
-
 
 img1=mpimg.imread(ImageFileGOT)
 img2=mpimg.imread(ImageFileTWD)
 img3=mpimg.imread(ImageFileCS)
 
-random_image=rand_img(600,600)
 
-r,v,b = histogrammes(img3)
+RGB_renforcement=[0.2,0,0]
+
 
 plt.figure(200)
 plt.imshow(img3)
 plt.axis('off')
 
-plt.figure(1)
-plt.subplot(311)
-plt.plot(range(256),r,'r-')
+# r_image = rand_img(600,600)
+# 
+# inverser(img3)
+# 
+# retourne(img3)
+# 
+# retourne2(img3)
+# 
+# symetrie_centrale(img3)
+# 
+# fusionne(img1,img2)
+# 
+# niveau_de_gris(img3)
+# 
+# niveau_de_gris2(img3)
+# 
+# filtrage(img3,'R')
+# 
+# noir_et_blanc(img3)
+# 
+# histogrammes(r_image)
+# 
+# extraction(img3,500,500,700,700)
+# 
+# renforcement_couleur(img3,RGB_renforcement)
 
-plt.subplot(312)
-plt.plot(range(256),v,'g-')
 
-plt.subplot(313)
-plt.plot(range(256),b,'b-')
 plt.show()
-
-
-# 
-# plt.figure(300)
-# plt.imshow(inverser(img3))
-# plt.axis('off')
-# 
-# plt.figure(400)
-# plt.imshow(retourne(img3))
-# plt.axis('off')
-# 
-# plt.figure(500)
-# plt.imshow(retourne2(img3))
-# plt.axis('off')
-# 
-# plt.figure(600)
-# plt.imshow(niveau_de_gris(img3))
-# plt.axis('off')
-# 
-# plt.figure(700)
-# plt.imshow(fusionne(img1,img1))
-# plt.axis('off')
-# 
-# plt.figure(800)
-# plt.imshow(filtrage(img3,'V'))
-# plt.axis('off')
-# 
-# plt.figure(900)
-# plt.imshow(noir_et_blanc(img3))
-# plt.axis('off')
-# 
-# plt.show()
 
