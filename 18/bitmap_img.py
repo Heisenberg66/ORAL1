@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import random as rd
+import time
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ import random as rd
 def rand_img(l,c):
     print("rand_img : En cours")
     
-    b = 1 * np.ones((l, l, 4), dtype=np.uint16)
+    b = 1.0 * np.ones((l, l, 4), dtype=np.uint16)
     
     for i in range(l):
         
@@ -22,9 +23,9 @@ def rand_img(l,c):
             
             for k in range(3):
                 
-                r = rd.randint(0,255)
-                b[i,j,k]=r
- 
+                r = rd.random()
+                b[i,j,k]=float(r)
+    print(b)
     plt.figure(2)
     plt.imshow(b)
     plt.axis('off')
@@ -158,14 +159,15 @@ def niveau_de_gris(img):
             pixel = (int(255 * (1-img[i,j,0])),int(255 * (1-img[i,j,1])),int(255 * (1-img[i,j,2])))
             gris = int(0.299 * pixel[0] + 0.587 * pixel[1] + 0.114 * pixel[2])
             
-            p=(gris,gris,gris,1)
+            p=(gris,gris,gris)
                                 
             b[i,j]=p
             
-   
     plt.figure(8)
     plt.imshow(b)
     plt.axis('off')
+    
+    return b
 
 #-------------------------------------------------------------------------------
 
@@ -254,7 +256,6 @@ def noir_et_blanc(img):
                                 
             b[i,j]=(p,p,p,1)
             
-   
     plt.figure(11)
     plt.imshow(b)
     plt.axis('off')
@@ -276,14 +277,9 @@ def histogrammes (img):
 
         for j in range(img.shape[1]):
             
-            # r[int(255 * (1-img[i,j,0]))]+=1
-            # v[int(255 * (1-img[i,j,1]))]+=1
-            # b[int(255 * (1-img[i,j,2]))]+=1
-            # 
-            r[img[i,j,0]]+=1
-            v[img[i,j,1]]+=1
-            b[img[i,j,2]]+=1
-        
+            r[int(255 * (1-img[i,j,0]))]+=1
+            v[int(255 * (1-img[i,j,1]))]+=1
+            b[int(255 * (1-img[i,j,2]))]+=1
     
     plt.figure(1)
     plt.subplot(311)
@@ -346,16 +342,87 @@ def renforcement_couleur(img,liste):
     plt.figure(13)
     plt.imshow(b)
     plt.axis('off')
+    
+#-------------------------------------------------------------------------------
+    
+def filtre (img,f33):
+    
+    b = img.copy()
+    s = sum(sum(f33))
+    print(s)
+    if s==0:
+        s=1
+    
+    for i in range(1,b.shape[0]-1):
+
+         for j in range(1,b.shape[1]-1):
+            
+            for k in range(3):
+                
+                b[i,j,k] = (b[i-1,j-1,k]*f33[0,0]+b[i-1,j,k]*f33[0,1]+b[i-1,j+1,k]*f33[0,2]+
+                            b[i,j-1,k]*f33[1,0]+b[i,j+1,k]*f33[1,2]+b[i+1,j-1,k]*f33[2,0]+
+                                b[i+1,j,k]*f33[2,1]+b[i+1,j+1,k]*f33[2,2]+b[i,j,k]*f33[1,1])/s
+                
+    
+    plt.figure(14)
+    plt.imshow(b)
+    plt.axis('off')    
+    
+#------------------------------------------------------------------------------
+    
+    
+def filtre2 (img,f33):
+    
+    b = niveau_de_gris(img)
+    copie = b.copy()
+
+    s = sum(sum(f33))
+    if s==0:
+        s=1
+
+    for i in range(1,b.shape[0]-1):
+
+         for j in range(1,b.shape[1]-1):
+             
+                    
+            p1 = b[i-1,j-1,0]*f33[0,0]
+            p2 = b[i-1,j,0]*f33[0,1]
+            p3 = b[i-1,j+1,0]*f33[0,2]
+            p4 = b[i,j-1,0]*f33[1,0]
+            p5 = b[i,j,0]*f33[1,1]
+            p6 = b[i,j+1,0]*f33[1,2]
+            p7 = b[i+1,j-1,0]*f33[2,0]
+            p8 = b[i+1,j,0]*f33[2,1]
+            p9 = b[i+1,j+1,0]*f33[2,2]
+            
+            
+            
+            tmp = p1+p2+p3+p4+p5+p6+p7+p8+p9
+            tmp=tmp/s
+            
+            
+            # if tmp < 0: tmp = 0
+            # if tmp > 255: tmp = 255
+            tmp+=128
+            tmp = 255-tmp
+            copie[i,j]=(tmp,tmp,tmp)
+          
+                
+    
+    plt.figure(14)
+    plt.imshow(copie)
+    plt.axis('off')  
+    
             
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
     
     
-    
-ImageFileTWD = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/tiger.png"
-ImageFileGOT = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/got.png"
-ImageFileCS = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/chapelle_sixtine.png"
+ImageFileTWD = "tiger.png"
+ImageFileGOT = "got.png"
+ImageFileCS = "chapelle_sixtine.png"
+ImageFileBB = "big_ben.png"
 
 
 # ouverture du fichier image
@@ -363,13 +430,15 @@ ImageFileCS = "/Users/Boulanger/Documents/COURS/M1/Oral1/18/chapelle_sixtine.png
 img1=mpimg.imread(ImageFileGOT)
 img2=mpimg.imread(ImageFileTWD)
 img3=mpimg.imread(ImageFileCS)
-
+img4=mpimg.imread(ImageFileBB)
 
 RGB_renforcement=[0.2,0,0]
+filtre_3x3 = np.ones((3,3))
+f = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]])
 
 
 plt.figure(200)
-plt.imshow(img3)
+plt.imshow(img4)
 plt.axis('off')
 
 # r_image = rand_img(600,600)
@@ -397,6 +466,8 @@ plt.axis('off')
 # extraction(img3,500,500,700,700)
 # 
 # renforcement_couleur(img3,RGB_renforcement)
+
+# filtre2(img4,f)
 
 
 plt.show()
