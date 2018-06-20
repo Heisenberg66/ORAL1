@@ -1,4 +1,4 @@
-import random as r
+import random
 
 def RLE (chaine):
     output = ""
@@ -17,5 +17,3 @@ def RLE (chaine):
 s= "aaabccccddeee"
 print(RLE(s))
 
-
-print(r.shuffle(list(range(10))))
