@@ -412,7 +412,50 @@ def filtre2 (img,f33):
     plt.figure(14)
     plt.imshow(copie)
     plt.axis('off')  
+
+#-------------------------------------------------------------------------------  
+
+def steganographie (img1,img2):
+    print("steganographie : En cours")
+
     
+    b=img1.copy()
+    
+    for i in range(b.shape[0]):
+
+        for j in range(b.shape[1]):
+            
+            
+            b[i,j,0]= round(b[i,j,0],3)+(img2[i,j,0]/1000)
+            b[i,j,1]= round(b[i,j,1],3)+(img2[i,j,1]/1000)
+            b[i,j,2]= round(b[i,j,2],3)+(img2[i,j,2]/1000)
+            
+    return b
+    # plt.figure(15)
+    # plt.imshow(b)
+    # plt.axis('off') 
+
+#-------------------------------------------------------------------------------  
+
+def recup(img):
+    
+    print("recup : En cours")
+
+    b = img.copy()
+    
+    for i in range(img.shape[0]):
+
+        for j in range(img.shape[1]):
+            
+            b[i,j,0]= (b[i,j,0]*1000) - int(b[i,j,0]*1000)
+            b[i,j,1]= (b[i,j,1]*1000) - int(b[i,j,1]*1000) 
+            b[i,j,2]= (b[i,j,2]*1000) - int(b[i,j,2]*1000)
+            
+    plt.figure(16)
+    plt.imshow(b)
+    plt.axis('off')
+
+
             
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
@@ -438,10 +481,10 @@ f = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]])
 
 
 plt.figure(200)
-plt.imshow(img4)
+plt.imshow(img3)
 plt.axis('off')
 
-# r_image = rand_img(600,600)
+#r_image = rand_img(600,600)
 # 
 # inverser(img3)
 # 
@@ -461,13 +504,15 @@ plt.axis('off')
 # 
 # noir_et_blanc(img3)
 # 
-# histogrammes(r_image)
+# histogrammes(img1)
 # 
 # extraction(img3,500,500,700,700)
 # 
-# renforcement_couleur(img3,RGB_renforcement)
+renforcement_couleur(img3,RGB_renforcement)
 
 # filtre2(img4,f)
+
+#recup(steganographie(img1,img2))
 
 
 plt.show()
